@@ -4,7 +4,7 @@ using UnityEngine;
 public class StarWave : MonoBehaviour
 {
     [SerializeField] GameObject Star;
-    float[] timing ={ 3.5f,5.5f,11f,13f};
+    readonly float[] timing ={ 3.5f,5.5f,11f,13f,18.5f,20.5f,26f,28f,29.5f};
     float time;
     int num;
 
@@ -17,22 +17,23 @@ public class StarWave : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        if (time > 14f) { time = 0; 
-            return; }
         if (time >= timing[num]) 
         {
 
             Generation();
             num++;
-            if(num == timing.Length) { num = 0; }
+            if(num == timing.Length) { 
+                num = 0;
+                time = 0;
+            }
             
         }
     }
 
     private void Generation()
     {
-        float x = Random.Range(-5,6);
-        float y = Random.Range(0,3);
+        float x = Random.Range(-3,6);
+        float y = Random.Range(2,3);
 
         Vector3 Pos = new Vector3(x,y,0);
        Instantiate(Star,Pos, Quaternion.identity);
