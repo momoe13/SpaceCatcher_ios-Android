@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TestParticle : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public class TestParticle : MonoBehaviour
     private void Update()
     {
         if (!IsPlaying.isPlay) { return; }
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && !UIHoverTracker.IsPointerOverButton)
         {
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "2_ResultScene" && !isLoadScene)
             {
@@ -57,6 +58,10 @@ public class TestParticle : MonoBehaviour
                 isLoadScene = true;
             }
         }
+        //if (isFading)
+        //{
+        //    OptionCheck();
+        //}
     }
 
     public void fadeCall()
@@ -64,10 +69,27 @@ public class TestParticle : MonoBehaviour
         StartCoroutine(fade());
     }
 
+    private void OptionCheck()
+    {
+        GameObject btn = GameObject.Find("OptionButton");
+        if(btn != null)btn.GetComponent<Button>().interactable = false;
+        GameObject op = GameObject.Find("OptionCanvas");
+        if (op != null)
+        {
+            op.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("‚È‚¢");
+        }
+    }
+
     private IEnumerator fade()
     {
+        OptionCheck();
         fadeIn.Play();
         yield return new WaitForSeconds(1.7f);
+        OptionCheck();
         fadeOut.Play();
         if (state == State.TITLE)
         {

@@ -1,6 +1,8 @@
 using System.Collections;
-using Unity.VisualScripting;
+
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class CraneMove2 : MonoBehaviour
 {
@@ -8,6 +10,9 @@ public class CraneMove2 : MonoBehaviour
     Vector3[] armSpeed = new Vector3[(int)State.ENUM_END];
 
     [SerializeField] private MagneticForceVariable magneticForceVariable;
+
+    [SerializeField] private Gauge gauge;
+
 
     [SerializeField]
     TurnManager turnManager;
@@ -17,33 +22,34 @@ public class CraneMove2 : MonoBehaviour
     [SerializeField] GameObject BrokenPushAnim;
 
     [SerializeField]
-    bool IsHit = false;//Œi•i‚É“–‚½‚Á‚½‚©
+    bool IsHit = false;//ï¿½iï¿½iï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     [SerializeField]
-    int animChangeLine;//SpaceƒL[‚ª‰ó‚ê‚é’l
+    int animChangeLine;//Spaceï¿½Lï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½l
     int pushCount = 0;
     [SerializeField]
     ButtonImageChangeManager ButtonImgChange;
 
-    //ƒNƒŒ[ƒ“‚ÌSE‚Ìc‚è‘Ò‹@ŠÔ
+    //ï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½SEï¿½Ìcï¿½ï¿½Ò‹@ï¿½ï¿½ï¿½ï¿½
     private float remainingTime = 0;
 
-    //ƒnƒCƒXƒRƒAƒ^ƒu‚Ì•\¦/”ñ•\¦
+    //ï¿½nï¿½Cï¿½Xï¿½Rï¿½Aï¿½^ï¿½uï¿½Ì•\ï¿½ï¿½/ï¿½ï¿½\ï¿½ï¿½
     CheckboxManager checkboxManager;
 
 
     Vector2 StartPos = new(-4.16f, 3f);
+
     Vector2 EndPos = new(6.68f, 3f);
     private enum State
     {
-        PUSH,       //ƒvƒŒƒCƒ„[‚ª‰Ÿ‚·ƒ^[ƒ“
-        MASHING,    //˜A‘Åƒ^[ƒ“
-        DOWN,       //ƒA[ƒ€‚ğ‰º‚°‚é
-        WAIT,       //ƒA[ƒ€’â~
-        UP,         //ƒA[ƒ€ˆø‚«ã‚°
-        LEFT,       //‰¡ˆÚ“®
-        RELEASE,    //‰ğ•ú@
-        RESET,      //‘S’l‰Šú‰»
+        PUSH,       //ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½[ï¿½ï¿½
+        MASHING,    //ï¿½Aï¿½Åƒ^ï¿½[ï¿½ï¿½
+        DOWN,       //ï¿½Aï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        WAIT,       //ï¿½Aï¿½[ï¿½ï¿½ï¿½ï¿½~
+        UP,         //ï¿½Aï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã‚°
+        LEFT,       //ï¿½ï¿½ï¿½Ú“ï¿½
+        RELEASE,    //ï¿½ï¿½ï¿½ï¿½@
+        RESET,      //ï¿½Sï¿½lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         ENUM_END
     }
@@ -61,11 +67,11 @@ public class CraneMove2 : MonoBehaviour
     private void Update()
     {
         if (!IsPlaying.isPlay) {
-            //ƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ªXV‚³‚ê‚½‚©Šm”F
+            //ï¿½`ï¿½Fï¿½bï¿½Nï¿½{ï¿½bï¿½Nï¿½Xï¿½ï¿½ï¿½Xï¿½Vï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½mï¿½F
             //SetPos();
             return; }
         /*
-         //fixed‚É‚·‚éê‡
+         //fixedï¿½É‚ï¿½ï¿½ï¿½ê‡
         bool isKeyDown, isKey, isKeyUp; 
         isKeyDown = Input.GetKeyDown(KeyCode.Space);
         isKey = Input.GetKey(KeyCode.Space);
@@ -109,23 +115,31 @@ public class CraneMove2 : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("‚È‚ñ‚à‚µ‚Ä‚È‚¢‚Ì‚É‚±‚í‚ê‚½");
+                Debug.Log("ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚È‚ï¿½ï¿½Ì‚É‚ï¿½ï¿½ï¿½ê‚½");
                 break;
         }
     }
 
-    //’·‰Ÿ‚µ‚Å‰¡ˆÚ“®‚Ìƒ^[ƒ“
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å‰ï¿½ï¿½Ú“ï¿½ï¿½Ìƒ^ï¿½[ï¿½ï¿½
     void ArmCommand1()
     {
         ButtonImgChange.SpriteChange(0);
 
         //if(isKey){
-        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+
+        //EventSystem.current.IsPointerOverGameObject()ï¿½Íƒ}ï¿½Eï¿½Xï¿½Jï¿½[ï¿½\ï¿½ï¿½ï¿½ï¿½UIï¿½Édï¿½È‚ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½ğ”»’è‚·ï¿½ï¿½iï¿½dï¿½È‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½ï¿½trueï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½)
+        //UIï¿½nï¿½ÉƒJï¿½[ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½dï¿½È‚ï¿½ï¿½Ä‚È‚ï¿½ï¿½ê‡ï¿½É‚Ì‚İƒNï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚Ù‚ï¿½ï¿½ï¿½ï¿½ê‡ï¿½ï¿½
+        //                                       if(!EventSystem.current.IsPointerOverGameObject())
+        //ï¿½ï¿½ï¿½ï¿½Íƒ{ï¿½^ï¿½ï¿½ï¿½Ì‚İ‚Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ßAHoverDetectorï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½gï¿½Åƒ{ï¿½^ï¿½ï¿½ï¿½ÉƒJï¿½[ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½dï¿½È‚ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½Äï¿½ï¿½ï¿½ï¿½AUIHoverTrackerï¿½Ì•Ïï¿½ï¿½ï¿½ï¿½Qï¿½ï¿½
+        if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && !UIHoverTracker.IsPointerOverButton)
+
         {
             ButtonImgChange.SpriteChange(1);
             transform.position += armSpeed[(int)State.PUSH] * Time.deltaTime;
         }
-        if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0) || EndPos.x <= this.transform.position.x)
+
+        if ((Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0) || EndPos.x <= this.transform.position.x) && !UIHoverTracker.IsPointerOverButton)
+
         {
             ButtonImgChange.SpriteChange(2);
             wait = 2.0f;
@@ -134,20 +148,26 @@ public class CraneMove2 : MonoBehaviour
         }
     }
 
-    //˜A‘Åƒ^[ƒ“
+    //ï¿½Aï¿½Åƒ^ï¿½[ï¿½ï¿½
     void ArmCommand2()
     {
         wait -= Time.deltaTime;
 
         if (0 < wait)
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) && !UIHoverTracker.IsPointerOverButton)
+
             {
-                //¥—Í‚ğ‘‚â‚·–½—ß
+                //ï¿½ï¿½ï¿½Í‚ğ‘‚â‚·ï¿½ï¿½ï¿½ï¿½
                 magneticForceVariable.GetKey();
                 pushCount++;
                 if (pushCount > animChangeLine) 
-                { BrokenPushAnim.SetActive(true);
+
+                {
+                    PushAnim.SetActive(false);
+                    BrokenPushAnim.SetActive(true);
+
                     pushCount = 0;
                 }
             }
@@ -159,51 +179,51 @@ public class CraneMove2 : MonoBehaviour
 
             IsHit = false;
             wait = 5.0f;
-            // ~‚è‚éŒø‰Ê‰¹Ä¶
+            // ï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½Ê‰ï¿½ï¿½Äï¿½
             AudioManager.Instance.CraneDownSEPlay();
             UFOanim.SetActive(true);
             state++;
         }
     }
 
-    //~‰ºƒ^[ƒ“
+    //ï¿½~ï¿½ï¿½ï¿½^ï¿½[ï¿½ï¿½
     void ArmCommand3()
     {
         transform.position += armSpeed[(int)State.DOWN] * Time.deltaTime;
         if (IsHit)
         {
-            // 1•bŒã‚É~‰ºSE’â~
+            // 1ï¿½bï¿½ï¿½É~ï¿½ï¿½SEï¿½ï¿½~
             StartCoroutine(StopSoundAfterHit(1.5f));
             state++;
             wait = 3.0f;
         }
     }
 
-    //’â~ƒ^[ƒ“
+    //ï¿½ï¿½~ï¿½^ï¿½[ï¿½ï¿½
     void ArmCommand4()
     {
         wait -= Time.deltaTime;
         if (0 > wait)
         {
-            // ã¸SEÄ¶
+            // ï¿½ã¸SEï¿½Äï¿½
             AudioManager.Instance.CraneUpSEPlay();
             state++;
         }
     }
 
-    //ã¸ƒ^[ƒ“
+    //ï¿½ã¸ï¿½^ï¿½[ï¿½ï¿½
     void ArmCommand5()
     {
         transform.position += armSpeed[(int)State.UP] * Time.deltaTime;
         if (transform.position.y >= StartPos.y)
         {
-            // ã¸SE’â~
+            // ï¿½ã¸SEï¿½ï¿½~
             AudioManager.Instance.StopCraneSEPlay();
             state++;
         }
     }
 
-    //‹AŠÒƒ^[ƒ“
+    //ï¿½Aï¿½Òƒ^ï¿½[ï¿½ï¿½
     void ArmCommand6()
     {
         transform.position += armSpeed[(int)State.LEFT] * Time.deltaTime;
@@ -215,9 +235,12 @@ public class CraneMove2 : MonoBehaviour
         }
     }
 
-    //è•ú‚µƒ^[ƒ“
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½[ï¿½ï¿½
     void ArmCommand7()
     {
+
+        gauge.GaugeReset();
+
         magneticForceVariable.MagneticOff();
         wait -= Time.deltaTime;
         if (0 > wait)

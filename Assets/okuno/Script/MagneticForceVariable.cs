@@ -39,31 +39,6 @@ public class MagneticForceVariable : MonoBehaviour
         AllValueReset();
     }
 
-    //void Update()
-    //{
-    //    // isSpaceがtrueの間のみ、連打回数加算を許可する
-    //    if (isSpace)
-    //    {
-    //        // スペースを押したらカウントを加算
-    //        if (Input.GetKeyDown(KeyCode.Space))
-    //        {
-    //            pushCount++;
-    //            Reflection();
-    //        }
-    //        /*-----------------テスト用コマンド-----------------*/
-    //        // 磁力範囲拡大
-    //        if (Input.GetKeyDown(KeyCode.U))
-    //        {
-    //            ColliderSizeUp();
-    //        }
-    //        // 磁力範囲縮小
-    //        if (Input.GetKeyDown(KeyCode.R))
-    //        {
-    //            ColliderSizeReset();
-    //        }
-    //    }        
-    //}
-
     public void GetKey()
     {
         // スペースを押したらカウントを加算

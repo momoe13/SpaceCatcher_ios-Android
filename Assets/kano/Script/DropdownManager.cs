@@ -5,11 +5,14 @@ public class DropdownManager : MonoBehaviour
 { 
     private TMP_Dropdown dropdown;
 
-    [SerializeField]
+    GameObject camera;
     CameraManager cameraManager;
     private void Start()
     {
         dropdown = GetComponent<TMP_Dropdown>();
+        camera = GameObject.Find("Main Camera");
+        cameraManager = camera.GetComponent<CameraManager>();
+
     }
     public void ChangeWindow()
     {
