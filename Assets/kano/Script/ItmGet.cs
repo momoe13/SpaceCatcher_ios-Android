@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ItmGet : MonoBehaviour
 {
@@ -10,41 +10,19 @@ public class ItmGet : MonoBehaviour
     [SerializeField] private GeneratingManager generatingManager;
     [SerializeField] private GameObject turnManager;
 
-    //-------加納
-    [SerializeField] private Slider StarSlider;//星用バー
-    int starCount=0;//現在のスターの数
-    [SerializeField] int maxStar;//スターの最大値
-    [SerializeField] StarRemoveManager starRemove;
-    //-------
     private void Start()
     {
         TargetItem.TargetSet();
         generatingManager.Generation();
-
-        //----加納---
-        StarSlider.maxValue = maxStar;//スライダーの最大値設定
-        StarSlider.value = starCount;
-  
-        //----加納---
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //�l�����̃p�[�e�B�N������
         Destroy(Instantiate(itemGetParticle, collision.gameObject.transform.position, Quaternion.identity), 1.0f);
-        //スター獲得
+        //�X�^�[����ꂽ���̏���
         if (collision.gameObject.tag == "Star")
         {
             AddScoreOnDestroy(collision, 10);//�X�R�A��10�_���Z
-            //----加納---
-            starCount++;
-            StarSlider.value = starCount;
-            if (starCount == maxStar)
-            {
-                starRemove.AllRemoveStar();
-                starCount = 0;
-                StarSlider.value = starCount;
-            }
-            //----加納---
         }
         //��b�p���[�A�b�v�A�C�e������ꂽ�Ƃ��̏���
         if (collision.gameObject.tag == "BasePowerUp")

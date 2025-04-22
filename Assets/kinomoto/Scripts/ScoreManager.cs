@@ -40,7 +40,7 @@ public class ScoreManager : MonoBehaviour
         widthPowerUpScoreText.text = "×" + ScoreKeep.widthPowerUpScore.ToString();
         turnRecoveryUpScoreText.text = "×" + ScoreKeep.turnRecoveryUpScore.ToString();
 
-        highScoreText.text = "ハイスコア\n" + highScore.ToString();
+        highScoreText.text = "ハイスコア:" + highScore.ToString();
 
         //ハイスコアの処理
         if (ScoreKeep.score >= highScore)

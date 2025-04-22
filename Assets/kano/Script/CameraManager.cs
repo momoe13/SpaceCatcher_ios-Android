@@ -7,17 +7,7 @@ public class CameraManager : MonoBehaviour
 
     int Size;
     bool Check;
-    public static CameraManager Instance { get; private set; }
-    private void Start()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+
 
 
     public void GetValue(int Value)
