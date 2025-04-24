@@ -1372,6 +1372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c0052575fff2647aeafc78be5dc1c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starDestroyParticle: {fileID: 1159465958}
 --- !u!4 &525470937
 Transform:
   m_ObjectHideFlags: 0
@@ -1384,7 +1385,8 @@ Transform:
   m_LocalPosition: {x: -0.68321055, y: -0.45125538, z: 0.6726301}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1159465955}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &531330706
@@ -2846,6 +2848,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2100533413}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1159465955 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8090697483710079272, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+  m_PrefabInstance: {fileID: 1725720242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1159465958 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6574064312733888771, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+  m_PrefabInstance: {fileID: 1725720242}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1170424182
 GameObject:
   m_ObjectHideFlags: 0
@@ -3216,9 +3228,6 @@ MonoBehaviour:
   itemGetParticle: {fileID: 2456698463892510480, guid: 52178d22e43296e4d991bbb561d0e7d7, type: 3}
   generatingManager: {fileID: 1999578893}
   turnManager: {fileID: 1717506638}
-  StarSlider: {fileID: 283903091}
-  maxStar: 10
-  starRemove: {fileID: 525470936}
 --- !u!61 &1531900080
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3997,6 +4006,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1725720242
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 525470937}
+    m_Modifications:
+    - target: {fileID: 8090697483710079272, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090697483710079272, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090697483710079272, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090697483710079272, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090697483710079272, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090697483710079272, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090697483710079272, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090697483710079272, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090697483710079272, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090697483710079272, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895629837714738779, guid: d2022d157e19461489fa4a32032354b2, type: 3}
+      propertyPath: m_Name
+      value: StarDestroyParticle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d2022d157e19461489fa4a32032354b2, type: 3}
 --- !u!1 &1733495288
 GameObject:
   m_ObjectHideFlags: 0
@@ -4106,6 +4172,7 @@ MonoBehaviour:
   - {x: 0, y: 1, z: 0}
   - {x: -1, y: 0, z: 0}
   magneticForceVariable: {fileID: 751045051}
+  gauge: {fileID: 0}
   turnManager: {fileID: 1717506639}
   UFOanim: {fileID: 944038651}
   PushAnim: {fileID: 56705707}
@@ -4361,7 +4428,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &1961294779
 RectTransform:

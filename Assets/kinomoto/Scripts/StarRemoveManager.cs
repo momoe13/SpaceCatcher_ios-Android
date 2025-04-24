@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class StarRemoveManager : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem starDestroyParticle;
     private void Update()
     {
         //Kキーを押した際に星のタグが付いたオブジェクトをすべて削除する
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            AllRemoveStar();
+            StartCoroutine(AllRemoveStar());
         }
     }
-    public void AllRemoveStar()
+    public IEnumerator AllRemoveStar()
     {
+        starDestroyParticle.Play();
+        yield return new WaitForSeconds(0.2f);
+
         //指定したタグ（星）のオブジェクトを配列に入れる
         GameObject[] stars = GameObject.FindGameObjectsWithTag("Star");
 
