@@ -22,18 +22,18 @@ public class CraneMove2 : MonoBehaviour
     [SerializeField] GameObject BrokenPushAnim;
 
     [SerializeField]
-    bool IsHit = false;//�i�i�ɓ���������
+    bool IsHit = false;//景品に当たったか
 
     [SerializeField]
-    int animChangeLine;//Space�L�[������l
+    int animChangeLine;//Spaceキーが壊れる値
     int pushCount = 0;
     [SerializeField]
     ButtonImageChangeManager ButtonImgChange;
 
-    //�N���[����SE�̎c��ҋ@����
+    //クレーンのSEの残り待機時間
     private float remainingTime = 0;
 
-    //�n�C�X�R�A�^�u�̕\��/��\��
+    //ハイスコアタブの表示/非表示
     CheckboxManager checkboxManager;
 
 
@@ -42,14 +42,14 @@ public class CraneMove2 : MonoBehaviour
     Vector2 EndPos = new(6.68f, 3f);
     private enum State
     {
-        PUSH,       //�v���C���[�������^�[��
-        MASHING,    //�A�Ń^�[��
-        DOWN,       //�A�[����������
-        WAIT,       //�A�[����~
-        UP,         //�A�[�������グ
-        LEFT,       //���ړ�
-        RELEASE,    //����@
-        RESET,      //�S�l������
+        PUSH,       //プレイヤーが押すターン
+        MASHING,    //連打ターン
+        DOWN,       //アームを下げる
+        WAIT,       //アーム停止
+        UP,         //アーム引き上げ
+        LEFT,       //横移動
+        RELEASE,    //解放　
+        RESET,      //全値初期化
 
         ENUM_END
     }
@@ -67,11 +67,12 @@ public class CraneMove2 : MonoBehaviour
     private void Update()
     {
         if (!IsPlaying.isPlay) {
-            //�`�F�b�N�{�b�N�X���X�V���ꂽ���m�F
+            //チェックボックスが更新されたか確認
             //SetPos();
-            return; }
+            return;
+        }
         /*
-         //fixed�ɂ���ꍇ
+         //fixedにする場合
         bool isKeyDown, isKey, isKeyUp; 
         isKeyDown = Input.GetKeyDown(KeyCode.Space);
         isKey = Input.GetKey(KeyCode.Space);
@@ -120,17 +121,16 @@ public class CraneMove2 : MonoBehaviour
         }
     }
 
-    //�������ŉ��ړ��̃^�[��
+    //長押しで横移動のターン
     void ArmCommand1()
     {
         ButtonImgChange.SpriteChange(0);
 
         //if(isKey){
-
-        //EventSystem.current.IsPointerOverGameObject()�̓}�E�X�J�[�\����UI�ɏd�Ȃ��Ă��邩�𔻒肷��i�d�Ȃ��Ă���ꍇ��true���Ԃ��Ă���)
-        //UI�n�ɃJ�[�\�����d�Ȃ��ĂȂ��ꍇ�ɂ̂݃N���[���������Ăق����ꍇ��
+        //EventSystem.current.IsPointerOverGameObject()はマウスカーソルがUIに重なっているかを判定する（重なっている場合にtrueが返ってくる)
+        //UI系にカーソルが重なってない場合にのみクレーンが動いてほしい場合↓
         //                                       if(!EventSystem.current.IsPointerOverGameObject())
-        //����̓{�^���݂̂ɐ������邽�߁AHoverDetector�X�N���v�g�Ń{�^���ɃJ�[�\�����d�Ȃ��Ă��邩�Ď����AUIHoverTracker�̕ϐ����Q��
+        //今回はボタンのみに制限するため、HoverDetectorスクリプトでボタンにカーソルが重なっているか監視し、UIHoverTrackerの変数を参照
         if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && !UIHoverTracker.IsPointerOverButton)
 
         {
@@ -148,7 +148,7 @@ public class CraneMove2 : MonoBehaviour
         }
     }
 
-    //�A�Ń^�[��
+    //連打ターン
     void ArmCommand2()
     {
         wait -= Time.deltaTime;
@@ -157,9 +157,8 @@ public class CraneMove2 : MonoBehaviour
         {
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) && !UIHoverTracker.IsPointerOverButton)
-
             {
-                //���͂𑝂₷����
+                //磁力を増やす命令
                 magneticForceVariable.GetKey();
                 pushCount++;
                 if (pushCount > animChangeLine) 
@@ -179,51 +178,51 @@ public class CraneMove2 : MonoBehaviour
 
             IsHit = false;
             wait = 5.0f;
-            // �~�����ʉ��Đ�
+            // 降りる効果音再生
             AudioManager.Instance.CraneDownSEPlay();
             UFOanim.SetActive(true);
             state++;
         }
     }
 
-    //�~���^�[��
+    //降下ターン
     void ArmCommand3()
     {
         transform.position += armSpeed[(int)State.DOWN] * Time.deltaTime;
         if (IsHit)
         {
-            // 1�b��ɍ~��SE��~
+            // 1秒後に降下SE停止
             StartCoroutine(StopSoundAfterHit(1.5f));
             state++;
             wait = 3.0f;
         }
     }
 
-    //��~�^�[��
+    //停止ターン
     void ArmCommand4()
     {
         wait -= Time.deltaTime;
         if (0 > wait)
         {
-            // �㏸SE�Đ�
+            // 上昇SE再生
             AudioManager.Instance.CraneUpSEPlay();
             state++;
         }
     }
 
-    //�㏸�^�[��
+    //上昇ターン
     void ArmCommand5()
     {
         transform.position += armSpeed[(int)State.UP] * Time.deltaTime;
         if (transform.position.y >= StartPos.y)
         {
-            // �㏸SE��~
+            // 上昇SE停止
             AudioManager.Instance.StopCraneSEPlay();
             state++;
         }
     }
 
-    //�A�҃^�[��
+    //帰還ターン
     void ArmCommand6()
     {
         transform.position += armSpeed[(int)State.LEFT] * Time.deltaTime;
@@ -235,8 +234,8 @@ public class CraneMove2 : MonoBehaviour
         }
     }
 
-    //������^�[��
-    void ArmCommand7()
+     //手放しターン
+     void ArmCommand7()
     {
 
         gauge.GaugeReset();
