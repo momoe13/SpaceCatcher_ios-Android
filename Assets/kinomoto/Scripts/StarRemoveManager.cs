@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class StarRemoveManager : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem starDestroyParticle;
+    [Header("収束演出")]
+    [SerializeField] private ParticleSystem starDestroyParticle1;
+    [Header("バースト演出")]
+    [SerializeField] private ParticleSystem starDestroyParticle2;
+    [Header("拡散演出")]
+    [SerializeField] private ParticleSystem starDestroyParticle3;
+
     private void Update()
     {
         //Kキーを押した際に星のタグが付いたオブジェクトをすべて削除する
@@ -15,7 +21,21 @@ public class StarRemoveManager : MonoBehaviour
     }
     public IEnumerator AllRemoveStar()
     {
-        starDestroyParticle.Play();
+        //収束演出
+        starDestroyParticle1.Play();
+        //バースト演出まで待機
+        yield return new WaitForSeconds(0.8f);
+        //バースト演出
+        starDestroyParticle2.Play();
+        yield return new WaitForSeconds(0.3f);
+        starDestroyParticle2.Play();
+        yield return new WaitForSeconds(0.3f);
+        starDestroyParticle2.Play();
+        yield return new WaitForSeconds(0.3f);
+        //拡散演出
+        starDestroyParticle3.Play();
+
+        //拡散演出中の星が見えなくなるタイミングまで待機
         yield return new WaitForSeconds(0.2f);
 
         //指定したタグ（星）のオブジェクトを配列に入れる
