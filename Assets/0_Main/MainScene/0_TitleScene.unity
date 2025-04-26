@@ -502,7 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinManager: {fileID: 1589768377}
   _showAdButton: {fileID: 780124025}
-  _androidAdUnitId: 5834462
+  _androidAdUnitId: Rewarded_Android
   _iOSAdUnitId: 5834463
 --- !u!1 &784374804
 GameObject:
@@ -698,7 +698,6 @@ GameObject:
   m_Component:
   - component: {fileID: 930838549}
   - component: {fileID: 930838548}
-  - component: {fileID: 930838547}
   m_Layer: 0
   m_Name: BackCamera
   m_TagString: Untagged
@@ -706,14 +705,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &930838547
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 930838546}
-  m_Enabled: 1
 --- !u!20 &930838548
 Camera:
   m_ObjectHideFlags: 0

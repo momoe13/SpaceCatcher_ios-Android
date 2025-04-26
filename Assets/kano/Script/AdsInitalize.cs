@@ -4,8 +4,7 @@ using System.Collections;
 
 public class AdsInitalize : MonoBehaviour
 {
-
-    [SerializeField] string _androidGameId = "YOUR_ANDROID_GAME_ID";
+    [SerializeField] string _androidGameId = "YOUR_Android_GAME_ID";
     [SerializeField] string _iOSGameId = "YOUR_IOS_GAME_ID";
     [SerializeField] bool _testMode = true;
     [SerializeField] RewardedAdsButton rewardedAdsButton;
@@ -20,19 +19,30 @@ public class AdsInitalize : MonoBehaviour
         _gameId = _androidGameId;
 #endif
 
-        Advertisement.Initialize(_gameId, _testMode);
-
-        StartCoroutine(WaitForInitialize());
+        // IUnityAdsInitializationListener を実装したクラスを渡す
+        Advertisement.Initialize(_gameId, _testMode, new AdsInitializationListener(this));
     }
 
-    IEnumerator WaitForInitialize()
+    // 初期化を完了したときの処理
+    private class AdsInitializationListener : IUnityAdsInitializationListener
     {
-        while (!Advertisement.isInitialized)
+        private AdsInitalize _adsInitalize;
+
+        public AdsInitializationListener(AdsInitalize adsInitalize)
         {
-            yield return null; // 毎フレーム待つ
+            _adsInitalize = adsInitalize;
         }
 
-        Debug.Log("Unity Ads 初期化完了！");
-        rewardedAdsButton.LoadAd();
+        public void OnInitializationComplete()
+        {
+            Debug.Log("Unity Ads 初期化完了！");
+            _adsInitalize.rewardedAdsButton.LoadAd();  // 広告の読み込み開始
+        }
+
+        // 失敗時に実行されるメソッド
+        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+        {
+            Debug.LogError($"Unity Ads 初期化失敗: {error.ToString()} - {message}");
+        }
     }
 }
