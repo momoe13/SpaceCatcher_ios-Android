@@ -21,15 +21,15 @@ public class StarRemoveManager : MonoBehaviour
     }
     public IEnumerator AllRemoveStar()
     {
-        //収束演出
-        starDestroyParticle1.Play();
-        //バースト演出まで待機
-        yield return new WaitForSeconds(0.8f);
-        //バースト演出
-        starDestroyParticle2.Play();
-        yield return new WaitForSeconds(0.3f);
-        starDestroyParticle2.Play();
-        yield return new WaitForSeconds(0.3f);
+        ////収束演出
+        //starDestroyParticle1.Play();
+        ////バースト演出まで待機
+        //yield return new WaitForSeconds(0.8f);
+        ////バースト演出
+        //starDestroyParticle2.Play();
+        //yield return new WaitForSeconds(0.3f);
+        //starDestroyParticle2.Play();
+        //yield return new WaitForSeconds(0.3f);
         starDestroyParticle2.Play();
         yield return new WaitForSeconds(0.3f);
         //拡散演出
