@@ -9,7 +9,7 @@ public class StarMove : MonoBehaviour
     {
         Pos = transform.position;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         Pos.x -= speed;
         Pos.y -= speed;

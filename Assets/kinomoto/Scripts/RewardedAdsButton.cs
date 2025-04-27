@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
-public class RewardedAdsButton : MonoBehaviour
+public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     [SerializeField] CoinManager coinManager;
 
     [SerializeField] Button _showAdButton;
-    [SerializeField] string _androidAdUnitId = "Rewarded_Android";
+    [SerializeField] string _androidAdUnitId = "Rewarded_Android";//Adunitsにある広告のIDを入れる
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // 未対応プラットフォームでは null のまま
 
+
+    public string AdUnitId => _adUnitId;
     void Awake()
     {
         //現在のプラットフォームに応じた広告ユニットIDを取得
