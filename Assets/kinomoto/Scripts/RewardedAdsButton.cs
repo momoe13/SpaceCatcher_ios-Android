@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
@@ -68,6 +69,9 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
             if (coinManager != null)
             {
                 coinManager.AdsCoin();
+
+                // ƒ{ƒ^ƒ“‚ð—LŒø‰»
+                _showAdButton.interactable = true;
             }
             else
             {

@@ -37,7 +37,7 @@ public class CraneMove2 : MonoBehaviour
     CheckboxManager checkboxManager;
 
 
-    Vector2 StartPos = new(-4.16f, 3f);
+    Vector2 StartPos = new(-4.2f, 3f);
 
     Vector2 EndPos = new(6.68f, 3f);
     private enum State

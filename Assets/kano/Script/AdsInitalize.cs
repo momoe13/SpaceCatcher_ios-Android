@@ -11,7 +11,7 @@ public class AdsInitalize : MonoBehaviour
 
     string _gameId;
 
-    void Awake()
+    private void Start()
     {
 #if UNITY_IOS
         _gameId = _iOSGameId;
@@ -21,8 +21,8 @@ public class AdsInitalize : MonoBehaviour
 
         // IUnityAdsInitializationListener ‚ğÀ‘•‚µ‚½ƒNƒ‰ƒX‚ğ“n‚·
         Advertisement.Initialize(_gameId, _testMode, new AdsInitializationListener(this));
-    }
 
+    }
     // ‰Šú‰»‚ğŠ®—¹‚µ‚½‚Æ‚«‚Ìˆ—
     private class AdsInitializationListener : IUnityAdsInitializationListener
     {
