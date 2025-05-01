@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CoinManager : MonoBehaviour
 {
-    //  public GameObject coinObject=null;
+    //public GameObject coinObject=null;
 
     [SerializeField]
     Text coinText;
@@ -22,6 +20,7 @@ public class CoinManager : MonoBehaviour
 
     public void AdsCoin()
     {
+        Debug.Log("AdsCoin() é¿çsÇ≥ÇÍÇΩ");
         coin += 3;
 
         //ÉRÉCÉìñáêîÇï€ë∂
