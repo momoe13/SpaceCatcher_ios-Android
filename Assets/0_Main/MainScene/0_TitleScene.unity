@@ -852,34 +852,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1887387026217157110, guid: 7f81ef01ff1ed5042b361051f4c1a63b, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 68.12988
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887387026217157110, guid: 7f81ef01ff1ed5042b361051f4c1a63b, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -68.19995
-      objectReference: {fileID: 0}
-    - target: {fileID: 4146835430616244959, guid: 7f81ef01ff1ed5042b361051f4c1a63b, type: 3}
-      propertyPath: m_Interactable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4146835430616244959, guid: 7f81ef01ff1ed5042b361051f4c1a63b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4146835430616244959, guid: 7f81ef01ff1ed5042b361051f4c1a63b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ToggleOptionButton
-      objectReference: {fileID: 0}
     - target: {fileID: 5525379804258015050, guid: 7f81ef01ff1ed5042b361051f4c1a63b, type: 3}
       propertyPath: m_Name
       value: OptionButtonOnlyCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 6396296415173242703, guid: 7f81ef01ff1ed5042b361051f4c1a63b, type: 3}
-      propertyPath: option
-      value: 
-      objectReference: {fileID: 295452564}
+    - target: {fileID: 5525379804258015050, guid: 7f81ef01ff1ed5042b361051f4c1a63b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6980418283531086529, guid: 7f81ef01ff1ed5042b361051f4c1a63b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1148,6 +1128,10 @@ PrefabInstance:
     - target: {fileID: 8651849224490417701, guid: ca62e6b80b6d10c46b8f5cc5c9284723, type: 3}
       propertyPath: m_Name
       value: Option
+      objectReference: {fileID: 0}
+    - target: {fileID: 8651849224490417701, guid: ca62e6b80b6d10c46b8f5cc5c9284723, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8994176673079304891, guid: ca62e6b80b6d10c46b8f5cc5c9284723, type: 3}
       propertyPath: m_AnchorMax.x
