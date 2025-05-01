@@ -24,7 +24,8 @@ public class CoinManager : MonoBehaviour
     {
         coin += 3;
 
-        coin = PlayerPrefs.GetInt("COIN", coin);
+        //コイン枚数を保存
+        PlayerPrefs.SetInt("COIN", coin);
         PlayerPrefs.Save();
 
         coinText.text = "所持コイン\n" + coin.ToString();

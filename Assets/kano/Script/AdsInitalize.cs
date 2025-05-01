@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 
 public class AdsInitalize : MonoBehaviour
 {
@@ -19,9 +20,17 @@ public class AdsInitalize : MonoBehaviour
         _gameId = _androidGameId;
 #endif
 
-        // IUnityAdsInitializationListener を実装したクラスを渡す
-        Advertisement.Initialize(_gameId, _testMode, new AdsInitializationListener(this));
+        if (Advertisement.isInitialized) 
+        {
+            Debug.Log("UnityAdsは初期化済みです");
+            rewardedAdsButton.LoadAd();
+        
+        }
+        else
+        {// IUnityAdsInitializationListener を実装したクラスを渡す
+            Advertisement.Initialize(_gameId, _testMode, new AdsInitializationListener(this));
 
+        }
     }
     // 初期化を完了したときの処理
     private class AdsInitializationListener : IUnityAdsInitializationListener

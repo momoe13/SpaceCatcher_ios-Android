@@ -23,6 +23,8 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         _adUnitId = _androidAdUnitId;
 #endif
 
+        // 一度だけリスナーを登録
+        _showAdButton.onClick.AddListener(ShowAd);
         // 広告が準備できるまでボタンを無効化
         _showAdButton.interactable = false;
     }
@@ -42,8 +44,6 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
 
         if (adUnitId.Equals(_adUnitId))
         {
-            // ボタンが押されたときに ShowAd() を呼び出すよう設定
-            _showAdButton.onClick.AddListener(ShowAd);
             // ボタンを有効化してユーザーが押せるようにする
             _showAdButton.interactable = true;
         }
@@ -61,16 +61,17 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     // 広告の視聴が完了したときの処理（ユーザーに報酬を与えるかどうかの判定）
     public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
     {
+        Debug.Log($"[OnUnityAdsShowComplete] adUnitId: {adUnitId}, showCompletionState: {showCompletionState}");
+
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            Debug.Log("報酬付き広告の視聴が完了しました");
-            // ユーザーに報酬を与える処理をここに書く
-            // 広告報酬でコインを増やす
+            Debug.Log("報酬付き広告の視聴が完了しました（コイン追加前）");
+
             if (coinManager != null)
             {
                 coinManager.AdsCoin();
+                Debug.Log("コイン追加完了");
 
-                // ボタンを有効化
                 _showAdButton.interactable = true;
             }
             else
