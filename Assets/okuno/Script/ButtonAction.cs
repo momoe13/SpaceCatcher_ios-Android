@@ -8,14 +8,7 @@ public class ButtonAction : MonoBehaviour
     public void ToggleHelpUI()
     {
         AudioManager.Instance.SelectSEPlay();
-        if (helpUI.activeSelf)
-        {
-            helpUI.SetActive(false);
-        }
-        else
-        {
-            helpUI.SetActive(true);
-        }
+        helpUI.SetActive(!helpUI.activeSelf);
     }
 
     public void ToggleOptionButton()
