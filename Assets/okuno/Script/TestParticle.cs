@@ -78,10 +78,6 @@ public class TestParticle : MonoBehaviour
         {
             op.SetActive(false);
         }
-        else
-        {
-            Debug.Log("‚È‚¢");
-        }
     }
 
     private IEnumerator fade()
