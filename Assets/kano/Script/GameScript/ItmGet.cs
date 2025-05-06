@@ -93,16 +93,10 @@ public class ItmGet : MonoBehaviour
 
             if (TargetItem.PushItem[0].name + "(Clone)" == collision.gameObject.name)
             {
-                Debug.Log("�ڕW�̃A�C�e�����Q�b�g�I");
                 TargetItem.TargetSet();
                 generatingManager.Generation();
                 turnManager.GetComponent<TurnManager>().TurnCountUp();
                 ScoreKeep.score += 1000;
-
-            }
-            else
-            {
-                Debug.Log("�^�[�Q�b�g�A�C�e�����Q�b�g�I");
             }
         }
     }

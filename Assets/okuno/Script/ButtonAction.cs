@@ -17,14 +17,6 @@ public class ButtonAction : MonoBehaviour
         if (option == null)
         {
             option = GameObject.Find("OptionCanvas");
-            if (option != null)
-            {
-                Debug.Log("Œ©‚Â‚©‚Á‚½");
-            }
-            else
-            {
-                Debug.Log("Œ©‚Â‚©‚ç‚È‚©‚Á‚½");
-            }
         }
         if (option != null)
         {
