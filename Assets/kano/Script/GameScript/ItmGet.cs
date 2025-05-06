@@ -40,10 +40,9 @@ public class ItmGet : MonoBehaviour
         {
             Destroy(Instantiate(itemGetParticle, collision.gameObject.transform.position, Quaternion.identity), 1.0f);
         }    
-        //�X�^�[����ꂽ���̏���
         if (collision.gameObject.tag == "Star")
         {
-            AddScoreOnDestroy(collision, 10);//�X�R�A��10�_���Z
+            AddScoreOnDestroy(collision, 10);
             
             //----加納---
             starCount++;
@@ -51,36 +50,33 @@ public class ItmGet : MonoBehaviour
             if (starCount == maxStar)
             {
                 starRender.sprite = starGage[1];
-                starRemove.AllRemoveStar();
-                starCount = 0;
-                StarSlider.value = starCount;
+                //-----奥野---
+                StartCoroutine(starRemove.AllRemoveStar());
+                StartCoroutine(StarGaugeReset());
+                //-----奥野---
             }
             //----加納---
         }
-        //��b�p���[�A�b�v�A�C�e������ꂽ�Ƃ��̏���
         if (collision.gameObject.tag == "BasePowerUp")
         {
             AudioManager.Instance.ItemGetSEPlay();
-            crane.GetComponent<MagneticForceVariable>().AddBase();//�N���[���̊�b�p���[�𑝉�
+            crane.GetComponent<MagneticForceVariable>().AddBase();
             ScoreKeep.basePowerUpScore += 1;
             AddScoreOnDestroy(collision, 100);
         }
-        //�{���p���[�A�b�v����ꂽ�Ƃ��̏���
         if (collision.gameObject.tag == "RatePowerUp")
         {
             AudioManager.Instance.ItemGetSEPlay();
-            crane.GetComponent<MagneticForceVariable>().AddMagnification();//�N���[���̔{���p���[�𑝉�
+            crane.GetComponent<MagneticForceVariable>().AddMagnification();
             ScoreKeep.ratePowerUpScore += 1;
             AddScoreOnDestroy(collision, 100);
         }
-        //�����p���[�A�b�v����ꂽ�Ƃ��̏���
         if (collision.gameObject.tag == "WidthPowerUp")
         {
             AudioManager.Instance.ItemGetSEPlay();
             ScoreKeep.widthPowerUpScore += 1;
             AddScoreOnDestroy(collision, 100);
         }
-        //�^�[���񕜐��A�b�v����ꂽ�Ƃ��̏���
         if (collision.gameObject.tag == "TurnRecoveryUp")
         {
             AudioManager.Instance.ItemGetSEPlay();
@@ -88,7 +84,6 @@ public class ItmGet : MonoBehaviour
             ScoreKeep.turnRecoveryUpScore += 1;
             AddScoreOnDestroy(collision, 100);
         }
-        //�ڕW�A�C�e�����擾�����ۂ̏���
         if (collision.gameObject.tag == "Target")
         {
             AudioManager.Instance.ItemGetSEPlay();
@@ -108,6 +103,15 @@ public class ItmGet : MonoBehaviour
     private void AddScoreOnDestroy(Collider2D collision, int addScore)
     {
         Destroy(collision.gameObject);
-        ScoreKeep.score += addScore;//�X�R�A�����Z
+        ScoreKeep.score += addScore;
     }
+    //-----奥野---
+    private IEnumerator StarGaugeReset()
+    {
+        yield return new WaitForSeconds(0.3f);
+        starCount = 0;
+        StarSlider.value = starCount;
+        starRender.sprite = starGage[0];
+    }
+    //-----奥野---
 }

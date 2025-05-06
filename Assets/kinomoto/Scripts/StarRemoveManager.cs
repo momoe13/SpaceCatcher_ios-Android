@@ -19,7 +19,7 @@ public class StarRemoveManager : MonoBehaviour
     }
     public IEnumerator AllRemoveStar()
     {
-
+        Debug.Log("åƒÇ—èoÇ≥ÇÍÇΩ");
         starDestroyParticle2.Play();
         yield return new WaitForSeconds(0.4f);
 
