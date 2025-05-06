@@ -246,6 +246,7 @@ public class CraneMove2 : MonoBehaviour
     //
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("ヒット");
         IsHit = true;
     }
 
