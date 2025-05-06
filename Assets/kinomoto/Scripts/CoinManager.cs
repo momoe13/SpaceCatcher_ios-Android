@@ -22,11 +22,23 @@ public class CoinManager : MonoBehaviour
     {
         Debug.Log("AdsCoin() 実行された");
         coin += 3;
+        SaveCoin();
 
+    }
+
+    private void SaveCoin()
+    {
         //コイン枚数を保存
         PlayerPrefs.SetInt("COIN", coin);
         PlayerPrefs.Save();
 
         coinText.text = "所持コイン\n" + coin.ToString();
     }
+
+    public void DecrementCoin()
+    {
+        coin--;
+        SaveCoin();
+    }
+
 }

@@ -7,7 +7,8 @@ public class TitleButton : MonoBehaviour
     // フェードの処理があるなら、それが終わったときにtrueにしてもらう
     private int spaceCount = 0;
 
-
+    [SerializeField] CoinManager coinManager;
+    [SerializeField] UseCoin useCoin;
     private void Start()
     {
         ScoreKeep.AllValueReset();
@@ -26,6 +27,8 @@ public class TitleButton : MonoBehaviour
         {
             if (spaceCount > 1) { return; }
             AudioManager.Instance.SelectSEPlay();
+            coinManager.DecrementCoin();
+            useCoin.CoinAnimStart();
             spaceCount++;
             TestParticle.Instance.fadeCall();
         }
