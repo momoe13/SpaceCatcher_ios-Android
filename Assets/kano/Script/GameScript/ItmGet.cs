@@ -33,7 +33,10 @@ public class ItmGet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ////スター獲得
-        Destroy(Instantiate(itemGetParticle, collision.gameObject.transform.position, Quaternion.identity), 1.0f);
+        if(collision.gameObject.tag == "Star"|| collision.gameObject.tag == "BasePowerUp"|| collision.gameObject.tag == "RatePowerUp"|| collision.gameObject.tag == "WidthPowerUp"|| collision.gameObject.tag == "TurnRecoveryUp"|| collision.gameObject.tag == "Target")
+        {
+            Destroy(Instantiate(itemGetParticle, collision.gameObject.transform.position, Quaternion.identity), 1.0f);
+        }    
         //�X�^�[����ꂽ���̏���
         if (collision.gameObject.tag == "Star")
         {
