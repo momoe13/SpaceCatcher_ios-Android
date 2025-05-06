@@ -16,6 +16,8 @@ public class ItmGet : MonoBehaviour
     int starCount = 0;//現在のスターの数
     [SerializeField] int maxStar;//スターの最大値
     [SerializeField] StarRemoveManager starRemove;
+    [SerializeField] Sprite[] starGage;
+    [SerializeField] Image starRender;
     //-------
 
     private void Start()
@@ -27,6 +29,7 @@ public class ItmGet : MonoBehaviour
         //----加納---
         StarSlider.maxValue = maxStar;//スライダーの最大値設定
         StarSlider.value = starCount;
+        starRender.sprite = starGage[0];
 
         //----加納---
     }
@@ -44,6 +47,7 @@ public class ItmGet : MonoBehaviour
             StarSlider.value = starCount;
             if (starCount == maxStar)
             {
+                starRender.sprite = starGage[1];
                 starRemove.AllRemoveStar();
                 starCount = 0;
                 StarSlider.value = starCount;

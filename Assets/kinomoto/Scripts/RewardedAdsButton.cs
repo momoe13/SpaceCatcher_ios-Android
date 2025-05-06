@@ -12,7 +12,6 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // 未対応プラットフォームでは null のまま
     //---------加納----
-    bool LoadFlg = false;
     bool RewardFlg = false;
 
     public string AdUnitId => _adUnitId;
@@ -34,8 +33,6 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     // 外部から呼び出して広告の読み込みを開始する
     public void LoadAd()
     {
-        if (LoadFlg) return;
-        RewardFlg = false; // 新しい広告に備えて報酬フラグをリセット
         // 注意！ 初期化が完了してから読み込みを行うこと（この例では初期化は別スクリプトで行う）
         Debug.Log("広告を読み込み中: " + _adUnitId);
         Advertisement.Load(_adUnitId, (IUnityAdsLoadListener)this);
@@ -50,6 +47,9 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         {
             // ボタンを有効化してユーザーが押せるようにする
             _showAdButton.interactable = true;
+
+            RewardFlg = false; // 新しい広告に備えて報酬フラグをリセット
+
         }
     }
 
@@ -65,7 +65,6 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     // 広告の視聴が完了したときの処理（ユーザーに報酬を与えるかどうかの判定）
     public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
     {
-        Debug.Log($"[OnUnityAdsShowComplete] adUnitId: {adUnitId}, showCompletionState: {showCompletionState}");
 
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
@@ -73,16 +72,18 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
             if (RewardFlg) { Debug.Log("報酬はすでに与えられました");
                 return;
             }
+            RewardFlg = true ;
             //---------加納
             if (coinManager != null)
             {
                 coinManager.AdsCoin();
-                Debug.Log("コイン追加完了");                                             
+                Debug.Log("コイン追加完了");
             }
             else
             {
                 Debug.LogWarning("CoinManagerがアタッチされていません！");
             }
+            LoadAd();
         }
     }
 

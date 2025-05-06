@@ -125,12 +125,6 @@ public class CraneMove2 : MonoBehaviour
     {
         ButtonImgChange.SpriteChange(0);
 
-        //if(isKey){
-
-        //EventSystem.current.IsPointerOverGameObject()�̓}�E�X�J�[�\����UI�ɏd�Ȃ��Ă��邩�𔻒肷��i�d�Ȃ��Ă���ꍇ��true���Ԃ��Ă���)
-        //UI�n�ɃJ�[�\�����d�Ȃ��ĂȂ��ꍇ�ɂ̂݃N���[���������Ăق����ꍇ��
-        //                                       if(!EventSystem.current.IsPointerOverGameObject())
-        //����̓{�^���݂̂ɐ������邽�߁AHoverDetector�X�N���v�g�Ń{�^���ɃJ�[�\�����d�Ȃ��Ă��邩�Ď����AUIHoverTracker�̕ϐ����Q��
         if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && !UIHoverTracker.IsPointerOverButton)
 
         {
