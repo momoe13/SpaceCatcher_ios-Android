@@ -19,7 +19,6 @@ public class StarRemoveManager : MonoBehaviour
     }
     public IEnumerator AllRemoveStar()
     {
-        Debug.Log("呼び出された");
         starDestroyParticle2.Play();
         yield return new WaitForSeconds(0.4f);
 
@@ -31,6 +30,7 @@ public class StarRemoveManager : MonoBehaviour
         //配列に入れたオブジェクトを一つずつ繰り返し消している
         foreach (GameObject star in stars)
         {
+            ScoreKeep.score += 10;
             Destroy(Instantiate(starDestroyParticle4, star.transform.position, Quaternion.identity), starDestroyParticle4.main.startLifetime.constant);//消去演出を再生し、1秒後に削除
             Destroy(star);
         }
