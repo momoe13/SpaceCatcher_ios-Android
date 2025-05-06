@@ -65,6 +65,8 @@ MonoBehaviour:
   craneSeBaseVolume: 0.03
   itemGet: {fileID: 8300000, guid: 3f630c6b2256dbc4bae9918f4eff0b30, type: 3}
   itemGetSeBaseVolume: 0.005
+  starRemove: {fileID: 8300000, guid: b95377c0a78ed6d4c8bff5e59eda552c, type: 3}
+  starRemoveSeBaseVolume: 0.005
   bgmSlider: {fileID: 0}
   seSlider: {fileID: 0}
 --- !u!1 &1308917582493768871

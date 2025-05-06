@@ -36,6 +36,9 @@ public class AudioManager : MonoBehaviour
     [Header("アイテム獲得")]
     [SerializeField] private AudioClip itemGet;
     [SerializeField] private float itemGetSeBaseVolume;
+    [Header("星全消し")]
+    [SerializeField] private AudioClip starRemove;
+    [SerializeField] private float starRemoveSeBaseVolume;
 
     [Header("オプション用Slider")]
     [SerializeField] private Slider bgmSlider;
@@ -215,6 +218,15 @@ public class AudioManager : MonoBehaviour
         currentSEBaseVolume = itemGetSeBaseVolume;
         SetSEVolume (seSlider.value);
         normalSeSource.clip = itemGet;
+        normalSeSource.PlayOneShot(normalSeSource.clip);
+    }
+
+    //星全消しSE
+    public void StarRemoveSEPlay()
+    {
+        currentSEBaseVolume = starRemoveSeBaseVolume;
+        SetSEVolume (seSlider.value);
+        normalSeSource.clip = starRemove;
         normalSeSource.PlayOneShot(normalSeSource.clip);
     }
 
