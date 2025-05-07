@@ -8,8 +8,8 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     [SerializeField] CoinManager coinManager;
 
     [SerializeField] Button _showAdButton;
-    [SerializeField] string _androidAdUnitId = "Rewarded_Android";//Adunitsにある広告のIDを入れる
-    [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
+    string _androidAdUnitId = "Rewarded_Android";//Adunitsにある広告のIDを入れる
+    string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // 未対応プラットフォームでは null のまま
     //---------加納----
     bool RewardFlg = false;

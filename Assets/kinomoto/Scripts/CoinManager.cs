@@ -10,7 +10,6 @@ public class CoinManager : MonoBehaviour
 
     public int coin = 0;
 
-
     private void Start()
     {
         //初期化、コイン引継ぎ
@@ -35,10 +34,12 @@ public class CoinManager : MonoBehaviour
         coinText.text = "所持コイン\n" + coin.ToString();
     }
 
-    public void DecrementCoin()
+    public bool DecrementCoin()
     {
         coin--;
         SaveCoin();
+        if (coin >0) { return true; }
+        else { return false; }
     }
 
 }

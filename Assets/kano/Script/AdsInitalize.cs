@@ -9,6 +9,7 @@ public class AdsInitalize : MonoBehaviour
     [SerializeField] string _iOSGameId = "YOUR_IOS_GAME_ID";
     [SerializeField] bool _testMode = true;
     [SerializeField] RewardedAdsButton rewardedAdsButton;
+    [SerializeField] BannerManager bannerManager;
 
     string _gameId;
 
@@ -29,7 +30,7 @@ public class AdsInitalize : MonoBehaviour
         else
         {// IUnityAdsInitializationListener ‚ğÀ‘•‚µ‚½ƒNƒ‰ƒX‚ğ“n‚·
             Advertisement.Initialize(_gameId, _testMode, new AdsInitializationListener(this));
-
+            bannerManager.LoadBanner();
         }
     }
     // ‰Šú‰»‚ğŠ®—¹‚µ‚½‚Æ‚«‚Ìˆ—
