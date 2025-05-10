@@ -123,6 +123,8 @@ public class CraneMove2 : MonoBehaviour
     //�������ŉ��ړ��̃^�[��
     void ArmCommand1()
     {
+        if (turnManager.turnCount <= 0) 
+            return;
         ButtonImgChange.SpriteChange(0);
 
         if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && !UIHoverTracker.IsPointerOverButton)

@@ -21,6 +21,8 @@ public class TitleButton : MonoBehaviour
             AudioManager.Instance.SelectSEPlay();
             spaceCount++;
             helpUi.SetActive(true);
+            int helpIndex = helpUi.transform.GetSiblingIndex();
+            transform.SetSiblingIndex(helpIndex + 1);
         }
         else
         {
