@@ -5,15 +5,14 @@ using UnityEngine.UI;
 
 public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField]
-    protected　CoinManager coinManager;
+    [SerializeField] CoinManager coinManager;
 
     [SerializeField] Button _showAdButton;
-    string _androidAdUnitId = "Rewarded_Android";//Adunitsにある広告のIDを入れる
-    string _iOSAdUnitId = "Rewarded_iOS";
+    [SerializeField] string _androidAdUnitId = "Rewarded_Android";//Adunitsにある広告のIDを入れる
+    [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // 未対応プラットフォームでは null のまま
     //---------加納----
-    protected bool RewardFlg = false;
+    bool RewardFlg = false;
 
     public string AdUnitId => _adUnitId;
     void Awake()
@@ -69,31 +68,25 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
 
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            GiveItme();
+            //---------加納
+            if (RewardFlg) { Debug.Log("報酬はすでに与えられました");
+                return;
+            }
+            RewardFlg = true ;
+            //---------加納
+            if (coinManager != null)
+            {
+                coinManager.AdsCoin();
+                Debug.Log("コイン追加完了");
+            }
+            else
+            {
+                Debug.LogWarning("CoinManagerがアタッチされていません！");
+            }
             LoadAd();
         }
     }
 
-    //-----加納 2025/05/12広告報酬の内容を書き換え使いまわせるように変更
-    //デフォだとコイン３枚が付与される
-    public virtual void GiveItme()
-    {
-        //---------加納
-        if (RewardFlg)
-        {
-            Debug.Log("報酬はすでに与えられました");
-            return;
-        }
-        RewardFlg = true;
-        //---------加納
-        if (coinManager != null)
-        {
-            coinManager.AdsCoin();
-            Debug.Log("コイン追加完了");
-        }
-    }
-   
-    //-----加納
     //広告の読み込みに失敗したときの処理
     public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
     {

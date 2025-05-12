@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
+using System.Collections;
+using UnityEditor.Experimental.GraphView;
 
 public class AdsInitalize : MonoBehaviour
 {
     [SerializeField] string _androidGameId = "YOUR_Android_GAME_ID";
     [SerializeField] string _iOSGameId = "YOUR_IOS_GAME_ID";
     [SerializeField] bool _testMode = true;
-    [SerializeField] RewardedAdsButton[] rewardedAdsButton;
-    [SerializeField] BannerManager bannerManager;
+    [SerializeField] RewardedAdsButton rewardedAdsButton;
 
     string _gameId;
 
@@ -21,16 +22,14 @@ public class AdsInitalize : MonoBehaviour
 
         if (Advertisement.isInitialized) 
         {
-            foreach(var button in rewardedAdsButton)
-            {
-                Debug.Log("UnityAdsは初期化済みです");
-                button.LoadAd();
-            }
+            Debug.Log("UnityAdsは初期化済みです");
+            rewardedAdsButton.LoadAd();
+        
         }
         else
         {// IUnityAdsInitializationListener を実装したクラスを渡す
             Advertisement.Initialize(_gameId, _testMode, new AdsInitializationListener(this));
-            bannerManager.LoadBanner();
+
         }
     }
     // 初期化を完了したときの処理
@@ -45,11 +44,8 @@ public class AdsInitalize : MonoBehaviour
 
         public void OnInitializationComplete()
         {
-            foreach (var button in _adsInitalize.rewardedAdsButton)
-            {
-                Debug.Log("Unity Ads 初期化完了！");
-               button.LoadAd();  // 広告の読み込み開始
-            }
+            Debug.Log("Unity Ads 初期化完了！");
+            _adsInitalize.rewardedAdsButton.LoadAd();  // 広告の読み込み開始
         }
 
         // 失敗時に実行されるメソッド
