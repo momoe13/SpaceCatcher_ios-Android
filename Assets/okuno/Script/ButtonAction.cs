@@ -8,14 +8,7 @@ public class ButtonAction : MonoBehaviour
     public void ToggleHelpUI()
     {
         AudioManager.Instance.SelectSEPlay();
-        if (helpUI.activeSelf)
-        {
-            helpUI.SetActive(false);
-        }
-        else
-        {
-            helpUI.SetActive(true);
-        }
+        helpUI.SetActive(!helpUI.activeSelf);
     }
 
     public void ToggleOptionButton()
@@ -24,14 +17,6 @@ public class ButtonAction : MonoBehaviour
         if (option == null)
         {
             option = GameObject.Find("OptionCanvas");
-            if (option != null)
-            {
-                Debug.Log("Œ©‚Â‚©‚Á‚½");
-            }
-            else
-            {
-                Debug.Log("Œ©‚Â‚©‚ç‚È‚©‚Á‚½");
-            }
         }
         if (option != null)
         {
