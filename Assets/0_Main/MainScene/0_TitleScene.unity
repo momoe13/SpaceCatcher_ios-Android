@@ -168,41 +168,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &139868208
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 139868209}
-  m_Layer: 5
-  m_Name: PanelManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &139868209
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139868208}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 293143694}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &144511960
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +274,6 @@ RectTransform:
   m_Children:
   - {fileID: 903368754}
   - {fileID: 1942013683}
-  - {fileID: 139868209}
   m_Father: {fileID: 846381872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -732,6 +696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Panel: {fileID: 293143693}
+  bannerManager: {fileID: 903368753}
 --- !u!1 &780124023
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,7 +858,7 @@ GameObject:
   - component: {fileID: 780175253}
   - component: {fileID: 780175252}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: warningTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1293,7 +1258,6 @@ GameObject:
   - component: {fileID: 960905747}
   - component: {fileID: 960905746}
   - component: {fileID: 960905749}
-  - component: {fileID: 960905750}
   m_Layer: 5
   m_Name: AdsPlayButton
   m_TagString: Untagged
@@ -1318,7 +1282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -315, y: 86}
+  m_AnchoredPosition: {x: 0, y: -101}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &960905746
@@ -1365,9 +1329,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 960905750}
-        m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
-        m_MethodName: GetCancel
+      - m_Target: {fileID: 960905749}
+        m_TargetAssemblyTypeName: RewardedAdsButton, Assembly-CSharp
+        m_MethodName: ShowAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1424,24 +1388,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 960905744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aa7e2fcfbe30e647a554088cce3244f, type: 3}
+  m_Script: {fileID: 11500000, guid: a60c4bb6348bb7149a80a082a6842c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coinManager: {fileID: 1589768377}
   _showAdButton: {fileID: 960905746}
---- !u!114 &960905750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960905744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45139f42083255a44af6edc8eda1bf6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Panel: {fileID: 293143693}
+  bannerManager: {fileID: 903368753}
 --- !u!1001 &962660631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1707,7 +1659,9 @@ MonoBehaviour:
   _androidGameId: 5834462
   _iOSGameId: 5834463
   _testMode: 1
-  rewardedAdsButton: {fileID: 780124028}
+  rewardedAdsButton:
+  - {fileID: 780124028}
+  - {fileID: 960905749}
   bannerManager: {fileID: 903368753}
 --- !u!4 &1177034384
 Transform:
@@ -1890,7 +1844,7 @@ GameObject:
   - component: {fileID: 1364434153}
   - component: {fileID: 1364434152}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

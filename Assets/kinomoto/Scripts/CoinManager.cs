@@ -25,6 +25,7 @@ public class CoinManager : MonoBehaviour
 
     }
 
+    //-----加納　複数回行う処理なのでまとめました
     private void SaveCoin()
     {
         //コイン枚数を保存
@@ -33,13 +34,20 @@ public class CoinManager : MonoBehaviour
 
         coinText.text = "所持コイン\n" + coin.ToString();
     }
-
+    
+    //コイン使用。コインが０枚以下の場合Falseを返す
     public bool DecrementCoin()
     {
+        if (coin <= 0) { return false; }
         coin--;
         SaveCoin();
-        if (coin >0) { return true; }
-        else { return false; }
+        return true;
+    }
+
+    public void WarningTabCoin()
+    {
+        coin += 1;
+        SaveCoin();
     }
 
 }

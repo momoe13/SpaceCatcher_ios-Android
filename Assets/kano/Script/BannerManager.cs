@@ -1,13 +1,8 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
-using UnityEngine.UI;
 
 public class BannerManager : MonoBehaviour
 {
-    // For the purpose of this example, these buttons are for functionality testing:
-   //[SerializeField] Button _loadBannerButton;
-   // [SerializeField] Button _showBannerButton;
-   // [SerializeField] Button _hideBannerButton;
 
     [SerializeField] BannerPosition _bannerPosition = BannerPosition.CENTER;
 
@@ -24,16 +19,10 @@ public class BannerManager : MonoBehaviour
         _adUnitId = _androidAdUnitId;
 #endif
 
-        // 広告の表示準備ができるまでボタンを無効にします。
-        //_showBannerButton.interactable = false;
-        //_hideBannerButton.interactable = false;
 
         // バナーの位置を設定します:
         Advertisement.Banner.SetPosition(_bannerPosition);
 
-        // クリックすると LoadBanner() メソッドが呼び出されるように Load Banner ボタンを構成します。
-       // _loadBannerButton.onClick.AddListener(LoadBanner);
-      //  _loadBannerButton.interactable = true;
     }
 
     // Implement a method to call when the Load Banner button is clicked:
@@ -55,14 +44,6 @@ public class BannerManager : MonoBehaviour
     {
         Debug.Log("Banner loaded");
 
-        //クリックすると ShowBannerAd() メソッドが呼び出されるように [バナーを表示] ボタンを構成します。
-       //_showBannerButton.onClick.AddListener(ShowBannerAd);
-       //// バナーを非表示ボタンを構成して、クリックすると HideBannerAd() メソッドが呼び出されます。
-       //_hideBannerButton.onClick.AddListener(HideBannerAd);
-       //
-       //// 両方のボタンを有効にします:
-       //_showBannerButton.interactable = true;
-       //_hideBannerButton.interactable = true;
     }
 
     // ロード errorCallback イベントがトリガーされたときに実行するコードを実装します。
@@ -88,7 +69,7 @@ public class BannerManager : MonoBehaviour
     }
 
     //バナーを非表示ボタンがクリックされたときに呼び出すメソッドを実装します
-    void HideBannerAd()
+    public void HideBannerAd()
     {
         // バナーを非表示にする
         Advertisement.Banner.Hide();
@@ -98,11 +79,4 @@ public class BannerManager : MonoBehaviour
     void OnBannerShown() { }
     void OnBannerHidden() { }
 
-    void OnDestroy()
-    {
-        // リスナーをクリーンアップします:
-       // _loadBannerButton.onClick.RemoveAllListeners();
-      // _showBannerButton.onClick.RemoveAllListeners();
-      // _hideBannerButton.onClick.RemoveAllListeners();
-    }
 }
