@@ -1,6 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
+
 public class TitleButton : MonoBehaviour
 {
 
@@ -8,17 +7,10 @@ public class TitleButton : MonoBehaviour
     // フェードの処理があるなら、それが終わったときにtrueにしてもらう
     private int spaceCount = 0;
 
-    [SerializeField] CoinManager coinManager;
-    [SerializeField] UseCoin useCoin;
-    [SerializeField] GameObject ErrorPanel;
-    [SerializeField] BannerManager bannerManager;
 
-    //コイン枚数が１枚以上あるか確認する用
-    bool coinFlg;
     private void Start()
     {
         ScoreKeep.AllValueReset();
-        ErrorPanel.SetActive(false);
     }
 
     public void GetButton()
@@ -34,14 +26,6 @@ public class TitleButton : MonoBehaviour
         {
             if (spaceCount > 1) { return; }
             AudioManager.Instance.SelectSEPlay();
-            coinFlg = coinManager.DecrementCoin();
-            if (!coinFlg) 
-            { //広告を挟む。広告終了後ゲーム開始
-                bannerManager.ShowBannerAd();
-                ErrorPanel.SetActive(true );
-                return;
-            }
-            useCoin.CoinAnimStart();
             spaceCount++;
             TestParticle.Instance.fadeCall();
         }

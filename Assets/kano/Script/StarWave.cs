@@ -4,8 +4,7 @@ using UnityEngine;
 public class StarWave : MonoBehaviour
 {
     [SerializeField] GameObject Star;
-    //readonly float[] timing ={ 3.5f,5.5f,11f,13f,18.5f,20.5f,26f,28f,29.5f};
-    readonly float[] timing = { 2.5f, 4.5f, 10f, 12f, 17.5f, 19.5f, 25f, 27f, 28.5f };
+    readonly float[] timing ={ 3.5f,5.5f,11f,13f,18.5f,20.5f,26f,28f,29.5f};
     float time;
     int num;
 
