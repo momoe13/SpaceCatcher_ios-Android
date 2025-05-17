@@ -21,29 +21,32 @@ public class TitleButton : MonoBehaviour
 
     public void GetButton()
     {
-        if (!HelpUICount.isFirstHelpShown)
+        if (IsPlaying.isPlay)
         {
-            HelpUICount.isFirstHelpShown = true;
-            AudioManager.Instance.SelectSEPlay();
-            spaceCount++;
-            helpUi.SetActive(true);
-            int helpIndex = helpUi.transform.GetSiblingIndex();
-            transform.SetSiblingIndex(helpIndex + 1);
-        }
-        else
-        {
-            if (spaceCount > 1) { return; }
-            AudioManager.Instance.SelectSEPlay();
-            coinFlg = coinManager.DecrementCoin();
-            if (!coinFlg)
-            { //広告を挟む。広告終了後ゲーム開始
-                bannerManager.ShowBannerAd();
-                ErrorPanel.SetActive(true);
-                return;
+            if (!HelpUICount.isFirstHelpShown)
+            {
+                HelpUICount.isFirstHelpShown = true;
+                AudioManager.Instance.SelectSEPlay();
+                spaceCount++;
+                helpUi.SetActive(true);
+                int helpIndex = helpUi.transform.GetSiblingIndex();
+                transform.SetSiblingIndex(helpIndex + 1);
             }
-            useCoin.CoinAnimStart();
-            spaceCount++;
-            TestParticle.Instance.fadeCall();
+            else
+            {
+                if (spaceCount > 1) { return; }
+                AudioManager.Instance.SelectSEPlay();
+                coinFlg = coinManager.DecrementCoin();
+                if (!coinFlg)
+                { //広告を挟む。広告終了後ゲーム開始
+                    bannerManager.ShowBannerAd();
+                    ErrorPanel.SetActive(true);
+                    return;
+                }
+                useCoin.CoinAnimStart();
+                spaceCount++;
+                TestParticle.Instance.fadeCall();
+            }
         }
     }
 }
