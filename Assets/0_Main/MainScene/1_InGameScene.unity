@@ -2123,6 +2123,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 398382945}
     - target: {fileID: 4964174839922985701, guid: 5e0aa31228a35ab4c86ea12e7ab3997d, type: 3}
+      propertyPath: animChangeLine
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964174839922985701, guid: 5e0aa31228a35ab4c86ea12e7ab3997d, type: 3}
       propertyPath: ButtonImgChange
       value: 
       objectReference: {fileID: 452247717}

@@ -30,7 +30,7 @@ public class TitleButton : MonoBehaviour
                 spaceCount++;
                 helpUi.SetActive(true);
                 int helpIndex = helpUi.transform.GetSiblingIndex();
-                transform.SetSiblingIndex(helpIndex + 1);
+                transform.SetSiblingIndex(helpIndex);
             }
             else
             {
